@@ -1,0 +1,10 @@
+<% @product.options.each do |option| %>
+  <p data-hook="presentation">
+    <% selected = @product.master.option_values.find { |ov| ov.option_type == option.option_type } %>
+    <%= label :option_values, option.option_type.name %><br />
+    <%= select(:option_values, option.option_type.name,
+      option.option_type.option_values.collect {|ov| [ ov.presentation, ov.id ] },
+      { :include_blank => true, :selected => selected ? selected.id : nil }, :style => 'width: 200px')
+    %>
+  </p>
+<% end %>
