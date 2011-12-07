@@ -3,7 +3,8 @@ Admin::ProductsController.class_eval do
   protected
   
   def assign_option_values
-    option_values = params[:option_values] || {}
+    return unless params.key?(:option_values) && params[:option_values].is_a?(Hash)
+    option_values = params[:option_values]
     @object.master.option_values = option_values.values.reject { |id| id.blank? }.map { |id| OptionValue.find(id) }
   end
   
